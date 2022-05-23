@@ -6,8 +6,6 @@
 #include <algorithm>
 #include "Cargo.hpp"
 
-class Cargo;
-
 class Ship{
     long id_;
     std::string name_;
@@ -21,9 +19,9 @@ class Ship{
     void removeFromStorage(std::shared_ptr<Cargo>);
 
     public:
-        Ship(long id, const std::string& name, size_t speed, size_t maxCrew,size_t capacity,int crew); //Whole data
-        //Ship(long id, size_t speed, size_t maxCrew) : Ship(id,"", speed, maxCrew,0,0) {}
-        Ship();
+        Ship(long id, const std::string& name, size_t speed, size_t maxCrew,size_t capacity,int crew);
+        Ship()
+        :id_(-1) {}
         //Setters:
         void setId(long id) {id_ = id;}
         void setName(const std::string& name) {name_ = name;}
@@ -47,8 +45,8 @@ class Ship{
         void unload(std::shared_ptr<Cargo>, uint16_t);
 
         //Functions:
-            Ship& operator+=(const int);  
-            Ship& operator-=(const int); 
+            Ship& operator+=(const uint16_t);
+            Ship& operator-=(const uint16_t); 
         
          
 };
