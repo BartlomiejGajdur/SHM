@@ -40,5 +40,5 @@ class Ship{
             Ship& operator+=(const int);  
             Ship& operator-=(const int); 
         
-         
+         //COS
 };
