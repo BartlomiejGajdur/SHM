@@ -9,7 +9,11 @@ class Cargo{
         size_t      amount_;
         size_t      basePrice_;
     public:
-            Cargo(std::string name, size_t amount, size_t basePrice);
+            Cargo(size_t amount, std::string name, size_t basePrice) 
+            :   amount_(amount),
+                name_(name),
+                basePrice_(basePrice)
+            {}
             Cargo() = default;
             virtual ~Cargo() =default;
 
@@ -17,11 +21,18 @@ class Cargo{
             virtual std::string     getName()        const = 0;
             virtual size_t          getAmount()      const = 0;
             virtual size_t          getBasePrice()   const = 0;
+
+            virtual Cargo& operator+=(const size_t) = 0;
+            virtual Cargo& operator-=(const size_t) = 0;
 };
 
 class Fruit : public Cargo{
     public:
-        Fruit(size_t amount, std::string& name, size_t basePrice, size_t expiry_date, size_t time_elapsed );
+        Fruit(size_t amount, std::string& name, size_t basePrice, size_t expiry_date, size_t time_elapsed )
+        : Cargo(amount,name,basePrice), 
+          expiry_date_(expiry_date),
+          time_elapsed_(time_elapsed)
+          {}
              //Getters:
             std::string getName() const override    {return name_;}
             size_t getAmount()    const override    {return amount_;}
@@ -35,13 +46,13 @@ class Fruit : public Cargo{
             }
 
 
-            Cargo& operator+=(const size_t value)
+            Cargo& operator+=(const size_t value) override
             {
                 amount_+=value;
                 return *this;
             }
 
-            Cargo& operator-=(const size_t value)
+            Cargo& operator-=(const size_t value) override
             {
                 amount_-=value;
                 return *this;
@@ -64,8 +75,8 @@ class Fruit : public Cargo{
 
 class Alcohol : public Cargo{
     public:
-        Alcohol(size_t amount, std::string name, size_t base_price, size_t percentageOfSpirit)
-        :
+        Alcohol(size_t amount, std::string name, size_t basePrice, size_t percentageOfSpirit)
+        : Cargo(amount,name,basePrice), 
         percentage_of_Spirit_(percentageOfSpirit)
         {}
         ~Alcohol() override = default;
@@ -75,13 +86,13 @@ class Alcohol : public Cargo{
         size_t getBasePrice() const override    {return basePrice_;}
         size_t getPrice()     const override    {return basePrice_ *percentage_of_Spirit_/96;}
 
-        Cargo& operator+=(const size_t value)
+        Cargo& operator+=(const size_t value) override
             {
                 amount_+=value;
                 return *this;
             }
 
-            Cargo& operator-=(const size_t value)
+            Cargo& operator-=(const size_t value) override
             {
                 amount_-=value;
                 return *this;
@@ -103,7 +114,10 @@ class Item : public Cargo{
             epic = 6,
             legendary = 10
         };
-    Item(size_t amount, std::string name, size_t basePrice, Rarity rarity);
+    Item(size_t amount, std::string name, size_t basePrice, Rarity rarity)
+    : Cargo(amount,name,basePrice), 
+      rarity_(rarity)
+    {}
     ~Item() override = default;
 
     size_t getAmount() const override {return amount_;}
@@ -112,13 +126,13 @@ class Item : public Cargo{
     size_t getPrice() const override {return basePrice_*static_cast<int>(rarity_);}
 
 
-    Cargo& operator+=(const size_t value)
+    Cargo& operator+=(const size_t value) override
             {
                 amount_+=value;
                 return *this;
             }
 
-    Cargo& operator-=(const size_t value)
+    Cargo& operator-=(const size_t value) override
             {
                 amount_-=value;
                 return *this;
