@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
 #include <memory>
 #include <algorithm>
 #include "Cargo.hpp"
@@ -14,12 +15,15 @@ class Ship{
     size_t maxCrew_;
     size_t capacity_;
     int crew_;
-    //Cargo cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargos_;
+
+    std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(std::shared_ptr<Cargo>);
+    void removeFromStorage(std::shared_ptr<Cargo>);
 
     public:
         Ship(long id, const std::string& name, size_t speed, size_t maxCrew,size_t capacity,int crew); //Whole data
         //Ship(long id, size_t speed, size_t maxCrew) : Ship(id,"", speed, maxCrew,0,0) {}
-        //Ship() : id_(-1) {}
+        Ship();
         //Setters:
         void setId(long id) {id_ = id;}
         void setName(const std::string& name) {name_ = name;}
@@ -36,9 +40,15 @@ class Ship{
         size_t getCapacity() const {return capacity_;}
         size_t getCrew() const {return crew_;}
 
+        std::shared_ptr<Cargo> getCargo(uint16_t) const;
+        std::vector<std::shared_ptr<Cargo>> getCargos() const;
+
+        void load(std::shared_ptr<Cargo>);
+        void unload(std::shared_ptr<Cargo>, uint16_t);
+
         //Functions:
             Ship& operator+=(const int);  
             Ship& operator-=(const int); 
         
-         //COSd asdas
+         
 };
