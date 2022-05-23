@@ -37,7 +37,11 @@ int main(){
     //     std::cout<<"Capacity: "<<s.getCapacity()<<std::endl<<std::endl;
     // }
     
-   
+   Alcohol alko(10,"wodka",50,40);
+   std::cout<<alko.getPrice()<<std::endl;
+
+   Item itemik(10,"Pokemon",100,Item::Rarity::legendary);
+   std::cout<<itemik.getPrice()<<std::endl;
    
 
   
