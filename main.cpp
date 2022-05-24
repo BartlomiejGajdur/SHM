@@ -43,7 +43,12 @@ int main(){
    Item itemik(10,"Pokemon",100,Item::Rarity::legendary);
    std::cout<<itemik.getPrice()<<std::endl;
    
+   Fruit jabko(10,"jablek",1,15,16);
+   std::cout<<jabko.getExpiryDate()<<std::endl;
+   std::cout<<jabko.getTimeElapsed()<<std::endl;
+   std::cout<<jabko.getPrice()<<std::endl;
 
+   std::cout<<static_cast<int>(1 * float(16 / 15));
   
 
 
