@@ -5,7 +5,8 @@
   
 Things used in project:
 
- - [x] object oriented programming, 
- - [x] smart pointers,
- - [x]  Exceptions,
- - [x]  Standard template library (STL)
+ - [x] Object oriented programming, 
+ - [x] Smart pointers,
+ - [x] Exceptions,
+ - [x] Standard template library (STL),
+ - [x] Design pattern - observer
